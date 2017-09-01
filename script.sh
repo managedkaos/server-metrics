@@ -9,7 +9,8 @@ do
     ssh ${i} 'df -h'                      > ${i}-$(date +%F).disk.txt
 
     echo "=== $i ==="
-    echo "Uptime: $(uptime)"
+    echo -n "Uptime: "
+    ssh ${i} 'uptime'
     pkgs=$(cat ${i}-$(date +%F).pkgs.txt | wc -l)
     echo "Packages: $pkgs packages need to be upgraded"
     cat ${i}-$(date +%F).inxi.txt
