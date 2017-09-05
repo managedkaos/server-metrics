@@ -1,0 +1,19 @@
+---
+- hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: Download inxi
+    get_url:
+        url: https://raw.githubusercontent.com/smxi/inxi/master/inxi
+        dest: ./inxi
+        mode: 0744
+
+  - name: Download ec2-metadata
+    get_url:
+        url: http://s3.amazonaws.com/ec2metadata/ec2-metadata
+        dest: ./ec2-metadata
+        mode: 0744
+
+  - name: Run inxi
+    shell: ./inxi -S -D -I -p -c 0 > {{inventory_hostname}}-$(date +%F).inxi.txt
