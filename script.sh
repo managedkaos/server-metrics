@@ -7,6 +7,7 @@ do
     ssh ${i} './ec2-metadata --all'       > ${i}-$(date +%F).meta.txt
     ssh ${i} 'apt list --upgradable 2>&1' > ${i}-$(date +%F).pkgs.txt
     ssh ${i} 'df -h'                      > ${i}-$(date +%F).disk.txt
+    ssh ${i} 'ubuntu-support-status'      > ${i}-$(date +%F).supp.txt
 
     echo "=== $i ==="
     echo -n "Uptime: "
@@ -15,6 +16,7 @@ do
     echo "Packages: $pkgs packages need to be upgraded"
     cat ${i}-$(date +%F).inxi.txt
     cat ${i}-$(date +%F).disk.txt
+    cat ${i}-$(date +%F).supp.txt
     echo
     echo
     echo
