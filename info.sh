@@ -3,8 +3,8 @@ date
 
 for i in $(cat servers.txt);
 do
-    ssh ${i} 'wget http://s3.amazonaws.com/ec2metadata/ec2-metadata && chmod +x ec2-metadata'
-    ssh ${i} 'wget --no-check-certificate https://raw.githubusercontent.com/smxi/inxi/master/inxi && chmod +x inxi'
+    ssh ${i} 'wget --quiet http://s3.amazonaws.com/ec2metadata/ec2-metadata && chmod +x ec2-metadata'
+    ssh ${i} 'wget --quiet --no-check-certificate https://raw.githubusercontent.com/smxi/inxi/master/inxi && chmod +x inxi'
     ssh ${i} './inxi -S -D -I -p -c 0'    > ${i}-$(date +%F).inxi.txt
     ssh ${i} './ec2-metadata --all'       > ${i}-$(date +%F).meta.txt
     ssh ${i} 'apt list --upgradable 2>&1' > ${i}-$(date +%F).pkgs.txt
