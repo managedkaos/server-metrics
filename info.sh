@@ -14,9 +14,12 @@ do
     echo "=== $i ==="
     echo -n "Uptime: "
     ssh ${i} 'uptime'
+    echo
     pkgs=$(cat ${i}-$(date +%F).pkgs.txt | wc -l)
     echo "Packages: $pkgs packages need to be upgraded"
+    echo
     cat ${i}-$(date +%F).inxi.txt
+    echo
     cat ${i}-$(date +%F).disk.txt
     echo
     echo
