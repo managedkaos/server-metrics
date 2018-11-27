@@ -8,7 +8,7 @@ do
     ssh ${i} './inxi -S -D -I -p -c 0'    > ${i}-$(date +%F).inxi.txt
     ssh ${i} './ec2-metadata --all'       > ${i}-$(date +%F).meta.txt
     ssh ${i} 'apt list --upgradable 2>&1' > ${i}-$(date +%F).pkgs.txt
-    ssh ${i} 'df -h'                      > ${i}-$(date +%F).disk.txt
+    ssh ${i} 'df -h /'                    > ${i}-$(date +%F).disk.txt
     ssh ${i} 'rm -vf ec2-metadata inxi'
 
     echo "=== $i ==="
